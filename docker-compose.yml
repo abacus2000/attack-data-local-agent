@@ -14,20 +14,31 @@ services:
       NEO4J_apoc_export_file_enabled: "true"
       NEO4J_apoc_import_file_enabled: "true"
       NEO4J_apoc_import_file_use__neo4j__config: "true"
-      NEO4J_apoc_import_file_allowed__url__patterns: "https://raw.githubusercontent.com/.*" 
-      # mounts volumn to local ./data dir
+      NEO4J_apoc_import_file_allowed__url__patterns: "https://raw.githubusercontent.com/.*"
     volumes:
-      - neo4j_data:/data
-    deploy:
-      resources:
-        limits:
-          memory: 2G
+      - neo4j_data:/data # comment out this line if you uncomment ./data:/data below
+      # - ./data:/data  # uncomment to store Neo4j data in your project directory instead of a docker volume
+      - ./init:/init
     healthcheck:
-      test: ["CMD", "cypher-shell", "-u", "neo4j", "-p", "${NEO4J_PASSWORD}", "RETURN 1"]
+      test: ["CMD", "cypher-shell", "-u", "${NEO4J_USER}", "-p", "${NEO4J_PASSWORD}", "RETURN 1"]
       interval: 30s
       timeout: 10s
-      retries: 3
+      retries: 10
 
-# declairs volume
+  init:
+    image: neo4j:5.26.24-community
+    container_name: attack-init
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    environment:
+      NEO4J_USERNAME: ${NEO4J_USER}
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD}
+    volumes:
+      - neo4j_data:/data
+      - ./init:/init
+    entrypoint: ["/bin/bash", "/init/load-attack-data.sh"]
+    restart: "no"
+
 volumes:
   neo4j_data:
