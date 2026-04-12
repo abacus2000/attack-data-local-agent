@@ -1,3 +1,19 @@
+
+# About the project
+
+This project is intended for learning about how to integrate an LLM Agent with ATT&CK data. 
+
+I further broke down all of the Strands Basics concepts in a sparate project here; if you are not familiar with Strands Agents, going through those notebooks will let you test agents locally:
+* https://github.com/abacus2000/strands_agents_study
+
+
+# Frugal Testing 
+
+Additionally, for the sake of proving the system quickly in its current state the Strands Agent Agent() object uses the default Bedrock agent on-demand endpoints which require localy AWS account redentials. 
+I am in the process of updating the notebooks for true locallity with open weight modles, please see this notebook in my other project with and example of Ollama use generally. 
+* https://github.com/abacus2000/strands_agents_study/blob/main/Concepts/Agents/AgentLoop/1_basic_agent_loop_and_simple_tool_usage.ipynb
+
+
 # attack-data-local-agent
 
 Start with:
