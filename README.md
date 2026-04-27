@@ -22,7 +22,9 @@ For true locallity with open weight modles, please see this notebook in my other
 The list of Model Providers we can use in Strands and assocaited runtimes can be found here:
 * https://strandsagents.com/docs/user-guide/concepts/model-providers/
 
-# attack-data-local-agent
+# Gettings started with attack-data-local-agent: General Tips (if you are new to this kind of thing) 
+
+GIT clone the project. 
 
 Start with:
 
@@ -37,7 +39,6 @@ Here's how it works:
   - It waits for Neo4j to be healthy via depends_on: condition: service_healthy
   - On first run: no .attack-data-initialized marker exists, so it runs the import, then writes the marker to /data/
   - On subsequent runs: sees the marker, prints a skip message, exits immediately
-
 
 If we run docker compose down -v it deletes the volume (and the marker in the volumn), so the next up re-imports, making the script properly idempotent.
 
