@@ -1,7 +1,12 @@
 
 # About the project
 
-This project is intended for learning about how to integrate an LLM Agent with ATT&CK data. 
+This project is intended for generally exploring how LLM Agents can integrate with Graph data, using ATT&CK data as an example. 
+
+By providing the LLM with tools (see the ./tools dir) that handle the graph queries, and designing each of the queries effectively to provide available steps to the next node, navigating a Graph database with an LLM is intuative. 
+
+Please see the notebook I drafted which demonstraits the walk through the ATT&CK data Graph 
+* https://github.com/abacus2000/attack-data-local-agent/blob/main/attack_agent.ipynb
 
 I further broke down all of the Strands Basics concepts in a sparate project here; if you are not familiar with Strands Agents, going through those notebooks will let you test agents locally:
 * https://github.com/abacus2000/strands_agents_study
@@ -10,9 +15,12 @@ I further broke down all of the Strands Basics concepts in a sparate project her
 # Frugal Testing 
 
 Additionally, for the sake of proving the system quickly in its current state the Strands Agent Agent() object uses the default Bedrock agent on-demand endpoints which require localy AWS account redentials. 
-I am in the process of updating the notebooks for true locallity with open weight modles, please see this notebook in my other project with and example of Ollama use generally. 
+
+For true locallity with open weight modles, please see this notebook in my other project with and example of Ollama use generally; the changes required are only an Ollama import and the calling of that Ollama Agent (or whichever LLM runtime you choose for locallity). 
 * https://github.com/abacus2000/strands_agents_study/blob/main/Concepts/Agents/AgentLoop/1_basic_agent_loop_and_simple_tool_usage.ipynb
 
+The list of Model Providers we can use in Strands and assocaited runtimes can be found here:
+* https://strandsagents.com/docs/user-guide/concepts/model-providers/
 
 # attack-data-local-agent
 
@@ -76,7 +84,11 @@ e.g.
 
 
 == References ==
+
 [1] https://jqlang.org/
+
 [2] https://github.com/neo4j/apoc
+
 [3] https://stackoverflow.com/questions/79332692/setting-the-apoc-import-file-enabled-true-in-the-neo4j-conf
+
 [4] https://community.neo4j.com/t/how-to-batch-json-records-using-apoc-library-for-better-importing/45928/2
